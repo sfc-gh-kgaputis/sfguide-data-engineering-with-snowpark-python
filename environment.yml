@@ -3,9 +3,9 @@ channels:
   - https://repo.anaconda.com/pkgs/snowflake
   - nodefaults
 dependencies:
-  - python=3.8
+  - python=3.10
   - snowflake-snowpark-python
   - pip
   - pip:
     # Snowflake
-    - snowflake-cli-labs
+    - snowflake-cli-labs==0.2.9
