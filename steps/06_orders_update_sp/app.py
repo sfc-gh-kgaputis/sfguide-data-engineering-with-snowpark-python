@@ -30,12 +30,11 @@ def merge_order_updates(session):
     source = session.table('HARMONIZED.POS_FLATTENED_V_STREAM')
     target = session.table('HARMONIZED.ORDERS')
 
-    # TODO: Is the if clause supposed to be based on "META_UPDATED_AT"?
     cols_to_update = {c: source[c] for c in source.schema.names if "METADATA" not in c}
     metadata_col_to_update = {"META_UPDATED_AT": F.current_timestamp()}
     updates = {**cols_to_update, **metadata_col_to_update}
 
-    # merge into DIM_CUSTOMER
+    # merge into ORDERS
     target.merge(source, target['ORDER_DETAIL_ID'] == source['ORDER_DETAIL_ID'], \
                         [F.when_matched().update(updates), F.when_not_matched().insert(updates)])
 
