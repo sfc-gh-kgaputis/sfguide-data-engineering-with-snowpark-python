@@ -18,6 +18,7 @@ USE SCHEMA HOL_DB.HARMONIZED;
 -- ----------------------------------------------------------------------------
 
 CREATE OR REPLACE TASK ORDERS_UPDATE_TASK
+SCHEDULE = '5 MINUTE'
 WAREHOUSE = HOL_WH
 WHEN
   SYSTEM$STREAM_HAS_DATA('POS_FLATTENED_V_STREAM')
